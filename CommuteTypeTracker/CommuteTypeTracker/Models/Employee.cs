@@ -12,12 +12,12 @@ namespace CommuteTypeTracker.Model
         [Required]
         [MaxLength(64)]
         public string LastName { get; set; }
-        public DateTime CreatedAt { get; }
-        public DateTime UpdatedAt { get; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
 
         [MaxLength(64)]
         [DataType(DataType.EmailAddress)]
-        [EmailAddress] 
+        
         public string Email { get; set; }
         public CommuteType DefaultCommuteType { get; set; }
         public List<DailyCommute> dailyCommutes { get; set; }

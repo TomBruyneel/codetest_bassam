@@ -4,7 +4,7 @@ namespace CommuteTypeTracker.Model
 {
     public class CommuteTypeTrackerContext : DbContext
     {
-        protected CommuteTypeTrackerContext(DbContextOptions<CommuteTypeTrackerContext> options) : base(options)
+        public CommuteTypeTrackerContext(DbContextOptions<CommuteTypeTrackerContext> options) : base(options)
         {
 
         }
