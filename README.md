@@ -60,5 +60,5 @@ Implement an API as described above.
 
 ## Optional
 
-- If using a RESTFul API, document if using the OpenAPI specification.
+- If using a RESTFul API, document it using the OpenAPI specification.
 - Write some unit tests testing the domain layer
