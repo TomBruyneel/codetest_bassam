@@ -10,23 +10,22 @@ using CommuteTypeTracker.Model;
 
 namespace CommuteTypeTracker.Controllers
 {
-    public class EmployeesController : Controller
+    public class DailyCommutesController : Controller
     {
         private readonly CommuteTypeTrackerContext _context;
 
-        public EmployeesController(CommuteTypeTrackerContext context)
+        public DailyCommutesController(CommuteTypeTrackerContext context)
         {
             _context = context;
-
         }
 
-        // GET: Employees
+        // GET: DailyCommutes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            return View(await _context.DailyCommute.ToListAsync());
         }
 
-        // GET: Employees/Details/5
+        // GET: DailyCommutes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +33,39 @@ namespace CommuteTypeTracker.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
+            var dailyCommute = await _context.DailyCommute
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (employee == null)
+            if (dailyCommute == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(dailyCommute);
         }
 
-        // GET: Employees/Create
+        // GET: DailyCommutes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Employees/Create
+        // POST: DailyCommutes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,CreatedAt,UpdatedAt,Email,DefaultCommuteType")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,DateOfCmmute,CreatdAt,UpdatedAt,CommuteType")] DailyCommute dailyCommute)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(employee);
+                _context.Add(dailyCommute);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            return View(dailyCommute);
         }
 
-        // GET: Employees/Edit/5
+        // GET: DailyCommutes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +73,22 @@ namespace CommuteTypeTracker.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee == null)
+            var dailyCommute = await _context.DailyCommute.FindAsync(id);
+            if (dailyCommute == null)
             {
                 return NotFound();
             }
-            return View(employee);
+            return View(dailyCommute);
         }
 
-        // POST: Employees/Edit/5
+        // POST: DailyCommutes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,CreatedAt,UpdatedAt,Email,DefaultCommuteType")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DateOfCmmute,CreatdAt,UpdatedAt,CommuteType")] DailyCommute dailyCommute)
         {
-            if (id != employee.Id)
+            if (id != dailyCommute.Id)
             {
                 return NotFound();
             }
@@ -98,12 +97,12 @@ namespace CommuteTypeTracker.Controllers
             {
                 try
                 {
-                    _context.Update(employee);
+                    _context.Update(dailyCommute);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.Id))
+                    if (!DailyCommuteExists(dailyCommute.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +113,10 @@ namespace CommuteTypeTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            return View(dailyCommute);
         }
 
-        // GET: Employees/Delete/5
+        // GET: DailyCommutes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +124,30 @@ namespace CommuteTypeTracker.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
+            var dailyCommute = await _context.DailyCommute
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (employee == null)
+            if (dailyCommute == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(dailyCommute);
         }
 
-        // POST: Employees/Delete/5
+        // POST: DailyCommutes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
-            _context.Employees.Remove(employee);
+            var dailyCommute = await _context.DailyCommute.FindAsync(id);
+            _context.DailyCommute.Remove(dailyCommute);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmployeeExists(int id)
+        private bool DailyCommuteExists(int id)
         {
-            return _context.Employees.Any(e => e.Id == id);
+            return _context.DailyCommute.Any(e => e.Id == id);
         }
     }
 }
